@@ -11,8 +11,10 @@ requires 'Teng::Schema::Declare';
 requires 'Exporter::Lite';
 requires 'DateTime::Format::MySQL';
 
-# test_requires 'Test::More';
-# test_requires 'Test::Class';
+test_requires 'DateTime';
+test_requires 'DateTime::Format::MySQL';
+test_requires 'Test::More';
+test_requires 'Test::Class';
 
 recursive_author_tests('xt');
 
