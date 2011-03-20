@@ -94,6 +94,16 @@ By default setting, this is same as
         }
     }
 
+=head1 CLASS OPTIONS
+
+You can configure some class setting.  For example,
+
+    Teng::Schema::Declare::Columns::DateTime->format_class('DateTime::Format::Atom');
+
+=head2 C<format_class>
+
+datetime format class.  specified class needs DateTime Format interface(format_datetime and parse_datetime).
+
 =head1 METHODS
 
 =head2 C<datetime_columns>
