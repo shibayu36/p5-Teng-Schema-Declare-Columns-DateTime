@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Carp;
 
-our $VERSION = '0.0.1';
+our $VERSION = '0.0.2';
 
 use base qw(Class::Data::Inheritable);
 __PACKAGE__->mk_classdata(format_class => 'DateTime::Format::MySQL');

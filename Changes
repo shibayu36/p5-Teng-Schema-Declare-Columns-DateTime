@@ -1,4 +1,6 @@
 Revision history for Teng::Schema::Declare::Columns::DateTime
 
-0.0.1    Sat Mar 19 01:05:51 2011
+0.0.1    Sat Mar 20 16:05:51 2011
         - Initial release
+0.0.2    Sat Mar 19 21:00:10 2011
+        - add format_class option
