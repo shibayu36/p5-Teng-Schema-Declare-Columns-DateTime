@@ -11,7 +11,7 @@ pm_to_blib
 \.tar\.gz
 \.lwpcookies
 cover_db
-Mojolicious-Plugin-CSRFDefender-
+Teng-Schema-Declare-Clumns-DateTime-
 \.shipit.*
 ^\.#
 ^\.prove
