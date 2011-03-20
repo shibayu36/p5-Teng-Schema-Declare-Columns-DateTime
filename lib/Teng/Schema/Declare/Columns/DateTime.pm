@@ -6,8 +6,12 @@ use Carp;
 
 our $VERSION = '0.0.1';
 
+use base qw(Class::Data::Inheritable);
+__PACKAGE__->mk_classdata(format_class => 'DateTime::Format::MySQL');
+
 use Teng::Schema::Declare;
 use DateTime::Format::MySQL;
+use Class::Load ();
 
 use Exporter::Lite;
 our @EXPORT = qw(datetime_columns);
@@ -26,12 +30,16 @@ sub datetime_columns {
 
 sub _inflate_datetime {
     my ($col_value) = @_;
-    return DateTime::Format::MySQL->parse_datetime($col_value);
+    my $format = __PACKAGE__->format_class;
+    Class::Load::load_class($format);
+    return $format->parse_datetime($col_value);
 }
 
 sub _deflate_datetime {
     my ($col_value) = @_;
-    return DateTime::Format::MySQL->format_datetime($col_value);
+    my $format = __PACKAGE__->format_class;
+    Class::Load::load_class($format);
+    return $format->format_datetime($col_value);
 }
 
 1;
@@ -53,7 +61,7 @@ Teng::Schema::Declare::Columns::DateTime - DSL extention of Teng::Schema::Declar
     table {
         name    "sample";
         pk      "id";
-        columns qw( name created_at updated_at );
+        columns qw( id name created_at updated_at );
         datetime_columns qw(created_at updated_at);
     };
 
@@ -71,7 +79,7 @@ If you write below:
         datetime_columns qw(created_at updated_at);
     }
 
-this is same as
+By default setting, this is same as
 
     table {
         name "sample";
