@@ -7,7 +7,9 @@ name     'Teng-Schema-Declare-Columns-DateTime';
 author   'Yuki Shibazaki <shibayu36 {at} gmail.com>';
 all_from 'lib/Teng/Schema/Declare/Columns/DateTime.pm';
 
-# requires 'Class::Accessor::Fast';
+requires 'Teng::Schema::Declare';
+requires 'Exporter::Lite';
+requires 'DateTime::Format::MySQL';
 
 # test_requires 'Test::More';
 # test_requires 'Test::Class';

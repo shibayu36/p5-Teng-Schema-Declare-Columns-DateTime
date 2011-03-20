@@ -7,6 +7,7 @@ use Carp;
 our $VERSION = '0.0.1';
 
 use Teng::Schema::Declare;
+use DateTime::Format::MySQL;
 
 use Exporter::Lite;
 our @EXPORT = qw(datetime_columns);
@@ -39,38 +40,59 @@ __END__
 
 =head1 NAME
 
-Teng::Schema::Declare::Columns::DateTime - [One line description of module's purpose here]
-
-
-=head1 VERSION
-
-This document describes Teng::Schema::Declare::Columns::DateTime version 0.0.1
-
+Teng::Schema::Declare::Columns::DateTime - DSL extention of Teng::Schema::Declare for declaring datetime columns
 
 =head1 SYNOPSIS
 
+    package MyDB::Schema;
+    use strict;
+    use warnings;
+    use Teng::Schema::Declare;
     use Teng::Schema::Declare::Columns::DateTime;
 
-=for author to fill in:
-    Brief code example(s) here showing commonest usage(s).
-    This section will be as far as many users bother reading
-    so make it as educational and exeplary as possible.
+    table {
+        name    "sample";
+        pk      "id";
+        columns qw( name created_at updated_at );
+        datetime_columns qw(created_at updated_at);
+    };
 
+    1;
 
 =head1 DESCRIPTION
 
-=for author to fill in:
-    Write a full description of the module and its features here.
-    Use subsections (=head2, =head3) as appropriate.
+Teng::Schema::Declare::Columns::DateTime provides the method which declare a column used as DateTime object.
+
+If you write below:
+
+    table {
+        name "sample";
+        columns qw(created_at updated_at);
+        datetime_columns qw(created_at updated_at);
+    }
+
+this is same as
+
+    table {
+        name "sample";
+        columns qw(created_at updated_at);
+        inflate qr{^(?:created_at|updated_at)$} => sub {
+            my ($col_value) = @_;
+            return DateTime::Format::MySQL->parse_datetime($col_value);
+        }
+        deflate qr{^(?:created_at|updated_at)$} => sub {
+            my ($col_value) = @_;
+            return DateTime::Format::MySQL->format_datetime($col_value);
+        }
+    }
 
 =head1 REPOSITORY
 
-https://github.com/
+https://github.com/shiba-yu36/p5-Teng-Schema-Declare-Columns-DateTime
 
 =head1 AUTHOR
 
   C<< <shibayu36 {at} gmail.com> >>
-
 
 =head1 LICENCE AND COPYRIGHT
 
