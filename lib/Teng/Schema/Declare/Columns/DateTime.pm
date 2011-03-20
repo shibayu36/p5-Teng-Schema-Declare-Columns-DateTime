@@ -20,16 +20,16 @@ sub datetime_columns {
     my ($pkg) = caller;
     my $inflate = \&{$pkg . '::inflate'};
     my $deflate = \&{$pkg . '::deflate'};
-    $inflate->($regexp => \&inflate_datetime);
-    $deflate->($regexp => \&deflate_datetime);
+    $inflate->($regexp => \&_inflate_datetime);
+    $deflate->($regexp => \&_deflate_datetime);
 }
 
-sub inflate_datetime {
+sub _inflate_datetime {
     my ($col_value) = @_;
     return DateTime::Format::MySQL->parse_datetime($col_value);
 }
 
-sub deflate_datetime {
+sub _deflate_datetime {
     my ($col_value) = @_;
     return DateTime::Format::MySQL->format_datetime($col_value);
 }
@@ -85,6 +85,12 @@ this is same as
             return DateTime::Format::MySQL->format_datetime($col_value);
         }
     }
+
+=head1 METHODS
+
+=head2 C<datetime_columns>
+
+DSL extention method for declaring datetime columns
 
 =head1 REPOSITORY
 
