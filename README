@@ -21,11 +21,6 @@ To install this module, run the following commands:
 	make test
 	make install
 
-DEPENDENCIES
-
-None.
-
-
 COPYRIGHT AND LICENCE
 
 Copyright (C) 2011 Yuki Shibazaki
