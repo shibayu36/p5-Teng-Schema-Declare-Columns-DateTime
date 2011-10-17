@@ -112,7 +112,7 @@ DSL extention method for declaring datetime columns
 
 =head1 REPOSITORY
 
-https://github.com/shiba-yu36/p5-Teng-Schema-Declare-Columns-DateTime
+https://github.com/shibayu36/p5-Teng-Schema-Declare-Columns-DateTime
 
 =head1 AUTHOR
 
